@@ -13,7 +13,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
   sources:
-    - chart: hashicorp/vault
+    - chart: vault
       repoURL: https://helm.releases.hashicorp.com
       targetRevision: 0.31.0
   destination:
