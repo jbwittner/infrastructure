@@ -6,3 +6,4 @@ resources:
   - metrics-server/metrics-server.yaml
   - cloudnative-pg
   - authentik/authentik.yaml
+  - vault/vault.yaml

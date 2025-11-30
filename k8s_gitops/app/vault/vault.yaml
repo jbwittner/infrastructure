@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-vault
+  namespace: argocd
+spec:
+  project: default
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - chart: hashicorp/vault
+      repoURL: https://helm.releases.hashicorp.com
+      targetRevision: 0.31.0
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vault
