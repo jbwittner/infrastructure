@@ -2,13 +2,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: app-project
+  name: infra-project
   namespace: argocd
   # Finalizer that ensures that project is not deleted until it is not referenced by any application
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: App-level project for Argo CD applications
+  description: Infra-level project for Argo CD applications
   # Allow manifests to deploy from any Git repos
   sourceRepos:
   - '*'
@@ -16,14 +16,14 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bootstrap-apps
+  name: bootstrap-infras
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/jbwittner/k8s_deploy
+    repoURL: https://github.com/jbwittner/infrastructure
     targetRevision: main
-    path: gitops/app
+    path: k8s_gitops/infra
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

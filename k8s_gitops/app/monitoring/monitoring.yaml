@@ -47,9 +47,9 @@ spec:
           kubelet:
             enabled: true
     # Source pour les ressources auxiliaires (namespace, secrets, etc.)
-    - repoURL: https://github.com/jbwittner/k8s_deploy
+    - repoURL: https://github.com/jbwittner/infrastructure
       targetRevision: main
-      path: gitops/app/monitoring/resources
+      path: k8s_gitops/app/monitoring/resources
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring

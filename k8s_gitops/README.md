@@ -50,7 +50,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
   source:
-    repoURL: https://github.com/jbwittner/k8s_deploy
+    repoURL: https://github.com/jbwittner/infrastructure
     targetRevision: main
     path: gitops/app/<app-name>/resources
   destination:
@@ -163,7 +163,7 @@ spec:
       helm:
         values: |
           # values
-    - repoURL: https://github.com/jbwittner/k8s_deploy
+    - repoURL: https://github.com/jbwittner/infrastructure
       targetRevision: main
       path: gitops/app/<app-name>/resources
 ```

@@ -80,7 +80,7 @@ spec:
       helm:
         values: |
           # ... values ...
-    - repoURL: https://github.com/jbwittner/k8s_deploy
+    - repoURL: https://github.com/jbwittner/infrastructure
       targetRevision: main
       path: gitops/<type>/<name>/resources
 ```
