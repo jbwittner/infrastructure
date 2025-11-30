@@ -1,11 +1,7 @@
-# Define the required variables (secrets)
-variable "github_token" {}
-
 # Define the required variables
 
 # Specify the provider
 provider "github" {
-  token = var.github_token # Token sourced from an environment variable
 }
 
 # This resource allows you to create and manage repositories within your GitHub organization or personal account.

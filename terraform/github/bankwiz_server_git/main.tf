@@ -1,11 +1,9 @@
 # Define the required variables
-variable "github_token" {}
 variable "sonar_token" {}
 variable "kube_config" {}
 
 # Specify the provider
 provider "github" {
-  token = var.github_token # Token sourced from an environment variable
 }
 
 # This resource allows you to create and manage repositories within your GitHub organization or personal account.

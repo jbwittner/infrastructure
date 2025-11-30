@@ -1,5 +1,4 @@
 # Define the required variables (secrets)
-variable "github_token" {}
 variable "cloudflare_account_id" {}
 variable "cloudflare_api_token" {}
 variable "sonar_token" {}
@@ -21,7 +20,6 @@ variable "vite_server_url" {
 
 # Specify the provider
 provider "github" {
-  token = var.github_token # Token sourced from an environment variable
 }
 
 # This resource allows you to create and manage repositories within your GitHub organization or personal account.
