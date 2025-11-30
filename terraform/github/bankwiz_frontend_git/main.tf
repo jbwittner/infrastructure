@@ -3,6 +3,7 @@ variable "cloudflare_account_id" {}
 variable "cloudflare_api_token" {}
 variable "sonar_token" {}
 variable "vite_client_id_auth0" {}
+variable "github_token" {}
 
 # Define the required variables
 variable "sonar_host_url" {
@@ -20,6 +21,7 @@ variable "vite_server_url" {
 
 # Specify the provider
 provider "github" {
+  token = var.github_token
 }
 
 # This resource allows you to create and manage repositories within your GitHub organization or personal account.

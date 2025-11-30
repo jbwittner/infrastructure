@@ -1,5 +1,8 @@
 # Specify the provider
+variable "github_token" {}
+
 provider "github" {
+  token = var.github_token
 }
 
 # This resource allows you to create and manage repositories within your GitHub organization or personal account.
