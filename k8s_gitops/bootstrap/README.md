@@ -11,7 +11,7 @@ The bootstrap files create ArgoCD Applications that manage infrastructure compon
 ### 1. Infrastructure First
 
 ```bash
-kubectl apply -f gitops/bootstrap/bootstrap-infra.yaml
+kubectl apply -f k8s_gitops/bootstrap/bootstrap-infra.yaml
 ```
 
 This deploys:
@@ -25,7 +25,7 @@ This deploys:
 ### 2. Applications
 
 ```bash
-kubectl apply -f gitops/bootstrap/bootstrap-app.yaml
+kubectl apply -f k8s_gitops/bootstrap/bootstrap-app.yaml
 ```
 
 This deploys:

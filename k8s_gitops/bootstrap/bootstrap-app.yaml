@@ -23,7 +23,7 @@ spec:
   source:
     repoURL: https://github.com/jbwittner/infrastructure
     targetRevision: main
-    path: k8s_gitops/apps
+    path: k8s_gitops/app
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
