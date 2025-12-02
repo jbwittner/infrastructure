@@ -20,6 +20,9 @@ spec:
       targetRevision: 79.11.0
       helm:
         values: |
+          crds:
+            upgradeJob:
+              enabled: true
           grafana:
             defaultDashboardsInterval: 10m
             ingress:
