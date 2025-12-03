@@ -23,6 +23,7 @@ spec:
           crds:
             upgradeJob:
               enabled: true
+              forceConflicts: true
           grafana:
             defaultDashboardsInterval: 10m
             ingress:

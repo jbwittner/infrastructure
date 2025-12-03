@@ -16,6 +16,10 @@ spec:
     - chart: vault
       repoURL: https://helm.releases.hashicorp.com
       targetRevision: 0.31.0
+      helm:
+        values: |
+          grafana:
+
   destination:
     server: https://kubernetes.default.svc
     namespace: vault
