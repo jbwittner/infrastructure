@@ -1,0 +1,28 @@
+# File: k8s_gitops/app/authentik/resources/postgres.yaml
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: authentik-db
+  # No namespace needed here, ArgoCD will apply the destination namespace (authentik)
+spec:
+  instances: 1
+  
+  # Low resource profile for standard usage
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "200m"
+    limits:
+      memory: "1Gi"
+      cpu: "1000m"
+
+  storage:
+    size: 10Gi
+    storageClass: standard 
+
+  bootstrap:
+    initdb:
+      database: authentik
+      owner: authentik
+      # This ensures the generated secret uses these specific keys if needed, 
+      # but standard CNPG secrets (username/password) are fine for Authentik.
