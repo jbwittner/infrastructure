@@ -20,11 +20,9 @@ spec:
       targetRevision: 79.9.0
       helm:
         values: |
-          crds:
-            upgradeJob:
-              enabled: true
-              forceConflicts: true
           grafana:
+            datasources:
+              watchMethod: "LIST"
             defaultDashboardsInterval: 10m
             ingress:
               enabled: true
