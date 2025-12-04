@@ -21,8 +21,9 @@ spec:
       helm:
         values: |
           grafana:
-            datasources:
-              watchMethod: "LIST"
+            sidecar:
+              datasources:
+                watchMethod: "LIST"
             defaultDashboardsInterval: 10m
             ingress:
               enabled: true
