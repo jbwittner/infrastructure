@@ -18,7 +18,7 @@ spec:
 
   storage:
     size: 10Gi
-    storageClass: standard 
+    storageClass: longhorn 
 
   bootstrap:
     initdb:
