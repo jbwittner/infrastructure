@@ -10,11 +10,11 @@ spec:
   # Low resource profile for standard usage
   resources:
     requests:
-      memory: "512Mi"
-      cpu: "200m"
+      memory: 512Mi
+      cpu: 200m
     limits:
-      memory: "1Gi"
-      cpu: "1000m"
+      memory: 1Gi
+      cpu: 1000m
 
   storage:
     size: 10Gi
