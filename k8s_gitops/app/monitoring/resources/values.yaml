@@ -1,5 +1,24 @@
 # k8s_gitops/app/monitoring/values.yaml
 grafana:
+  grafana.ini:
+    check_for_updates: false
+    reporting_enabled: false
+    server:
+      enable_gzip: true
+    security:
+      disable_gravatar: true
+    dashboards:
+      min_refresh_interval: 60s
+    auth.google:
+      enabled = true
+      client_id = CLIENT_ID
+      client_secret = CLIENT_SECRET
+      scopes = https://www.googleapis.com/auth/userinfo.profile 
+      https://www.googleapis.com/auth/userinfo.email
+      auth_url = https://accounts.google.com/o/oauth2/auth
+      token_url = https://accounts.google.com/o/oauth2/token
+      allowed_domains = mycompany.com mycompany.org
+      allow_sign_up = true
   defaultDashboardsInterval: 10m
   ingress:
     enabled: true
