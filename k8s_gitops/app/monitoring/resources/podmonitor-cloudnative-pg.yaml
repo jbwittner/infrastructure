@@ -6,11 +6,11 @@ metadata:
     release: app-monitoring
 spec:
   namespaceSelector:
-    matchNames:
-      - databases
+    any: true
   selector:
-    matchLabels:
-      cnpg.io/cluster: app-cloudnative-pg-cluster
+    matchExpressions:
+      - key: cnpg.io/cluster
+        operator: Exists
   podMetricsEndpoints:
   - port: metrics
 ---
