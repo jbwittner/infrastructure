@@ -20,7 +20,7 @@ spec:
       targetRevision: 79.9.0
       helm:
         valueFiles:
-          - $infra-repo/k8s_gitops/app/monitoring/values.yaml
+          - $infra-repo/k8s_gitops/app/monitoring/resources/values.yaml
     - repoURL: https://github.com/jbwittner/infrastructure
       targetRevision: main
       ref: infra-repo
