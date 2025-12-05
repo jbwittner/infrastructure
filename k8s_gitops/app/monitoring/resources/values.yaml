@@ -9,7 +9,9 @@ grafana:
       disable_gravatar: true
     dashboards:
       min_refresh_interval: 60s
-    auth.google:
+    auth.basic:
+      enabled: false
+    auth.generic_oauth:
       enabled: true
       scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
       auth_url: https://accounts.google.com/o/oauth2/auth
