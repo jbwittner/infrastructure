@@ -26,11 +26,11 @@ grafana:
   envValueFrom:
     GF_AUTH_GENERIC_OAUTH_CLIENT_ID:
       secretKeyRef:
-        name: monitoring-oauth-secret
+        name: monitoring-secret
         key: oauth_client_id
     GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET:
       secretKeyRef:
-        name: monitoring-oauth-secret
+        name: monitoring-secret
         key: oauth_client_secret
   defaultDashboardsInterval: 10m
   ingress:
