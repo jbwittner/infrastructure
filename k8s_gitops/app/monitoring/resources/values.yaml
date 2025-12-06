@@ -4,7 +4,7 @@ grafana:
     check_for_updates: false
     reporting_enabled: false
     server:
-      protocol: https
+      http_port: 443
       enable_gzip: true
     security:
       disable_gravatar: true
