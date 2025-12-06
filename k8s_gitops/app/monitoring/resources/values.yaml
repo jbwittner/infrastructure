@@ -23,6 +23,15 @@ grafana:
       allowed_domains: grafana.wittnerlab.com
       use_pkce: true
       use_refresh_token: true
+  envValueFrom:
+    GF_AUTH_GENERIC_OAUTH_CLIENT_ID:
+      secretKeyRef:
+        name: monitoring-oauth-secret
+        key: oauth_client_id
+    GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET:
+      secretKeyRef:
+        name: monitoring-oauth-secret
+        key: oauth_client_secret
   defaultDashboardsInterval: 10m
   ingress:
     enabled: true
