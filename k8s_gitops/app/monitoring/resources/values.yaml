@@ -10,10 +10,11 @@ grafana:
     dashboards:
       min_refresh_interval: 60s
     auth:
-      disable_login_form: true
+      disable_login_form: false
     auth.generic_oauth:
       enabled: true
-      scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
+      name: Authentik
+      scopes: openid profile email offline_access
       auth_url: https://accounts.google.com/o/oauth2/auth
       token_url: https://accounts.google.com/o/oauth2/token
       allowed_domains: mycompany.com mycompany.org
