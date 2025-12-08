@@ -34,9 +34,9 @@ kubectl patch nodes.longhorn.io w-ns3058844 -n longhorn-system \
 kubectl patch nodes.longhorn.io w-ns3048244 -n longhorn-system \
   --type merge --patch-file k8s_gitops/infra/longhorn/resources/add-disk-w-ns3048244.patch.yaml
 
-# Node w-ns3106816
-kubectl patch nodes.longhorn.io w-ns3106816 -n longhorn-system \
-  --type merge --patch-file k8s_gitops/infra/longhorn/resources/add-disk-w-ns3106816.patch.yaml
+# Node w-ns3091353
+kubectl patch nodes.longhorn.io w-ns3091353 -n longhorn-system \
+  --type merge --patch-file k8s_gitops/infra/longhorn/resources/add-disk-w-ns3091353.patch.yaml
 ```
 
 ## Usage
