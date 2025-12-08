@@ -1,5 +1,8 @@
 # k8s_gitops/app/monitoring/values.yaml
 grafana:
+  sidecar:
+    datasources:
+      watchMethod: "SLEEP"
   grafana.ini:
     check_for_updates: false
     reporting_enabled: false
