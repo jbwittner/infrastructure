@@ -27,6 +27,12 @@ Pour appliquer les changements, il faut exécuter la commande suivante :
 terraform apply -var-file=prod.env.tfvars
 ```
 
+### Linting
+Pour appliquer le linting, il faut exécuter la commande suivante :
+```bash
+terraform fmt -recursive
+``` 
+
 ## Backend
 GCP Storage Bucket est utilisé comme backend pour stocker l'état de Terraform.
 
