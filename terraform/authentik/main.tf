@@ -69,8 +69,11 @@ resource "authentik_provider_oauth2" "grafana-provider" {
 }
 
 resource "authentik_application" "grafana-application" {
-  name              = "Grafana"
-  slug              = "grafana"
+  name            = "Grafana"
+  slug            = "grafana"
+  meta_icon       = "fa://fa-chart-area"
+  open_in_new_tab = true
+
   protocol_provider = authentik_provider_oauth2.grafana-provider.id
 }
 
@@ -105,7 +108,7 @@ resource "authentik_provider_oauth2" "argocd-provider" {
       url           = "https://argocd.wittnerlab.com/api/dex/callback",
     }
   ]
-  signing_key         = data.authentik_certificate_key_pair.generated.id
+  signing_key             = data.authentik_certificate_key_pair.generated.id
   access_token_validity   = "minutes=5"
   refresh_token_threshold = "hours=1"
   refresh_token_validity  = "days=30"
@@ -114,6 +117,8 @@ resource "authentik_provider_oauth2" "argocd-provider" {
 resource "authentik_application" "argocd-application" {
   name              = "ArgoCD"
   slug              = "argocd"
+  meta_icon         = "fa://fa-octopus-deploy"
+  open_in_new_tab   = true
   protocol_provider = authentik_provider_oauth2.argocd-provider.id
 }
 
