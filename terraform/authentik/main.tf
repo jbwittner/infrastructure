@@ -1,7 +1,5 @@
 variable "AUTHENTIK_TOKEN" {}
 variable "AUTHENTIK_INSECURE" {}
-variable "AUTHENTIK_GRAFANA_CLIENT_ID" {}
-variable "AUTHENTIK_GRAFANA_CLIENT_SECRET" {}
 
 provider "authentik" {
   url      = "https://authentik.wittnerlab.com/"
@@ -9,18 +7,13 @@ provider "authentik" {
   insecure = var.AUTHENTIK_INSECURE
 }
 
+### CORE AUTHENTIK RESOURCES ###
 
-### OAUTH2 PROVIDER AND APPLICATION FOR GRAFANA ###
-
-# Create an application with a provider attached and policies applied
-
-data "authentik_flow" "grafana-authorization-flow" {
-  slug = "default-provider-authorization-explicit-consent"
+resource "authentik_system_settings" "settings" {
+  default_token_duration = "hours=24"
 }
 
-data "authentik_flow" "grafana-invalidation-flow" {
-  slug = "default-provider-invalidation-flow"
-}
+### OAUTH2 GENERIC SETTINGS  ###
 
 data "authentik_property_mapping_provider_scope" "email" {
   managed = "goauthentik.io/providers/oauth2/scope-email"
@@ -32,6 +25,19 @@ data "authentik_property_mapping_provider_scope" "profile" {
 
 data "authentik_property_mapping_provider_scope" "openid" {
   managed = "goauthentik.io/providers/oauth2/scope-openid"
+}
+
+### OAUTH2 PROVIDER AND APPLICATION FOR GRAFANA ###
+
+variable "AUTHENTIK_GRAFANA_CLIENT_ID" {}
+variable "AUTHENTIK_GRAFANA_CLIENT_SECRET" {}
+
+data "authentik_flow" "grafana-authorization-flow" {
+  slug = "default-provider-authorization-explicit-consent"
+}
+
+data "authentik_flow" "grafana-invalidation-flow" {
+  slug = "default-provider-invalidation-flow"
 }
 
 resource "authentik_provider_oauth2" "grafana-provider" {
@@ -54,4 +60,44 @@ resource "authentik_application" "grafana-application" {
   name              = "Grafana"
   slug              = "grafana"
   protocol_provider = authentik_provider_oauth2.grafana-provider.id
+}
+
+
+### OAUTH2 PROVIDER AND APPLICATION FOR ARGOCD ###
+
+variable "AUTHENTIK_ARGOCD_CLIENT_ID" {}
+variable "AUTHENTIK_ARGOCD_CLIENT_SECRET" {}
+
+data "authentik_flow" "argocd-authorization-flow" {
+  slug = "default-provider-authorization-explicit-consent"
+}
+
+data "authentik_flow" "argocd-invalidation-flow" {
+  slug = "default-provider-invalidation-flow"
+}
+
+resource "authentik_provider_oauth2" "argocd-provider" {
+  name               = "argocd-oauth2-provider"
+  client_id          = var.AUTHENTIK_ARGOCD_CLIENT_ID
+  client_secret      = var.AUTHENTIK_ARGOCD_CLIENT_SECRET
+  authorization_flow = data.authentik_flow.argocd-authorization-flow.id
+  invalidation_flow  = data.authentik_flow.argocd-invalidation-flow.id
+  property_mappings = [
+    data.authentik_property_mapping_provider_scope.email.id,
+    data.authentik_property_mapping_provider_scope.profile.id,
+    data.authentik_property_mapping_provider_scope.openid.id
+  ]
+  redirect_uris = [
+    "https://argocd.wittnerlab.com/api/dex/callback",
+    "https://localhost:8085/auth/callback"
+  ]
+  access_token_validity   = "minutes=5"
+  refresh_token_threshold = "hours=1"
+  refresh_token_validity  = "days=30"
+}
+
+resource "authentik_application" "argocd-application" {
+  name              = "ArgoCD"
+  slug              = "argocd"
+  protocol_provider = authentik_provider_oauth2.argocd-provider.id
 }
