@@ -36,8 +36,26 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```bash
 helm upgrade argocd argo/argo-cd \
   --namespace argocd \
-  --values argocd/values.yaml
+  --values k8s_gitops/argocd/values.yaml
 ```
+
+## Sealed Secrets
+
+Generate sealed secret for sensitive configuration:
+
+```bash
+cat k8s_gitops/argocd/argocd.secret.yaml | \
+  kubeseal --controller-namespace sealed-secrets \
+  --controller-name infra-sealed-secrets \
+  --format yaml > k8s_gitops/argocd/argocd.sealed-secret.yaml
+```
+
+Apply the sealed secret:
+
+```bash
+kubectl apply -f k8s_gitops/argocd/argocd.sealed-secret.yaml
+``` 
+
 
 ## Cloudflare Tunnel Integration
 

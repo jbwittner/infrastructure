@@ -17,6 +17,29 @@ server:
     tls: true # Enable TLS termination
     pathType: Prefix
     path: /
-  configs:
-    cm:
-      statusbadge.enabled: true
+configs:
+  secret:
+      extra:
+          dex.authentik.clientId: "${authentik_client_id}"
+          dex.authentik.clientSecret: "${authentik_client_secret}"
+  cm:
+    statusbadge.enabled: true
+    url: https://argocd.wittnerlab.com
+    dex.config: |
+      connectors:
+      - config:
+          issuer: https://authentik.wittnerlab.com/application/o/argocd/
+          clientID: $dex.authentik.clientId
+          clientSecret: $dex.authentik.clientSecret
+          insecureEnableGroups: true
+          scopes:
+          - openid
+          - profile
+          - email
+        name: authentik
+        type: oidc
+        id: authentik
+  rbac:
+    policy.csv: |
+      g, ArgoCD Admins, role:admin
+      g, ArgoCD Viewers, role:readonly
