@@ -135,12 +135,6 @@ resource "authentik_group" "grafana-admins" {
   is_superuser = true
 }
 
-resource "authentik_group" "grafana-users" {
-  name         = "grafana_users"
-  users        = []
-  is_superuser = false
-}
-
 ### ArgoCO Groups ###
 
 resource "authentik_group" "argocd-admins" {
