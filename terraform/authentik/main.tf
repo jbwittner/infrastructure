@@ -13,6 +13,12 @@ resource "authentik_system_settings" "settings" {
   default_token_duration = "hours=24"
 }
 
+### Certificate ###
+
+data "authentik_certificate_key_pair" "generated" {
+  name = "authentik Self-signed Certificate"
+}
+
 ### OAUTH2 GENERIC SETTINGS  ###
 
 data "authentik_property_mapping_provider_scope" "email" {
@@ -51,6 +57,12 @@ resource "authentik_provider_oauth2" "grafana-provider" {
     data.authentik_property_mapping_provider_scope.profile.id,
     data.authentik_property_mapping_provider_scope.openid.id
   ]
+  allowed_redirect_uris = [
+    {
+      matching_mode = "strict",
+      url           = "https://grafana.wittnerlab.com/login/generic_oauth",
+    }
+  ]
   access_token_validity   = "minutes=5"
   refresh_token_threshold = "hours=1"
   refresh_token_validity  = "days=30"
@@ -87,10 +99,13 @@ resource "authentik_provider_oauth2" "argocd-provider" {
     data.authentik_property_mapping_provider_scope.profile.id,
     data.authentik_property_mapping_provider_scope.openid.id
   ]
-  redirect_uris = [
-    "https://argocd.wittnerlab.com/api/dex/callback",
-    "https://localhost:8085/auth/callback"
+  allowed_redirect_uris = [
+    {
+      matching_mode = "strict",
+      url           = "https://argocd.wittnerlab.com/api/dex/callback",
+    }
   ]
+  signing_key         = data.authentik_certificate_key_pair.generated.id
   access_token_validity   = "minutes=5"
   refresh_token_threshold = "hours=1"
   refresh_token_validity  = "days=30"
@@ -100,4 +115,42 @@ resource "authentik_application" "argocd-application" {
   name              = "ArgoCD"
   slug              = "argocd"
   protocol_provider = authentik_provider_oauth2.argocd-provider.id
+}
+
+### Users ###
+
+resource "authentik_user" "jbwittner" {
+  username = "jbwittner"
+  name     = "Jean-Baptiste WITTNER"
+  email    = "jeanbaptiste.wittner@outlook.com"
+}
+
+### GROUPS ###
+
+### Grafana Groups ###
+
+resource "authentik_group" "grafana-admins" {
+  name         = "grafana_admins"
+  users        = [authentik_user.jbwittner.id]
+  is_superuser = true
+}
+
+resource "authentik_group" "grafana-users" {
+  name         = "grafana_users"
+  users        = []
+  is_superuser = false
+}
+
+### ArgoCO Groups ###
+
+resource "authentik_group" "argocd-admins" {
+  name         = "argocd_admins"
+  users        = [authentik_user.jbwittner.id]
+  is_superuser = true
+}
+
+resource "authentik_group" "argocd-users" {
+  name         = "argocd_users"
+  users        = []
+  is_superuser = true
 }

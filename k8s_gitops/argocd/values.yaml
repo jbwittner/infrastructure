@@ -42,5 +42,5 @@ configs:
         id: authentik
   rbac:
     policy.csv: |
-      g, ArgoCD Admins, role:admin
-      g, ArgoCD Viewers, role:readonly
+      g, argocd_admins, role:admin
+      g, argocd_users, role:readonly
