@@ -50,3 +50,8 @@ resource "authentik_provider_oauth2" "grafana-provider" {
   refresh_token_validity  = "days=30"
 }
 
+resource "authentik_application" "grafana-application" {
+  name              = "Grafana"
+  slug              = "grafana"
+  protocol_provider = authentik_provider_oauth2.grafana-provider.id
+}
