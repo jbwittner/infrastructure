@@ -1,2 +1,2 @@
-sonar_token=""
-kube_config=""
+sonar_token = ""
+kube_config = ""

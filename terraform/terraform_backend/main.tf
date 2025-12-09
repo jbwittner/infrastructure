@@ -25,7 +25,7 @@ resource "random_id" "default" {
 resource "google_storage_bucket" "default" {
   name     = "${random_id.default.hex}-terraform-remote-backend"
   location = "EU"
-  project = data.google_project.default.project_id
+  project  = data.google_project.default.project_id
 
   force_destroy               = false
   public_access_prevention    = "enforced"
