@@ -50,6 +50,16 @@ cat k8s_gitops/argocd/argocd.secret.yaml | \
   --format yaml > k8s_gitops/argocd/argocd.sealed-secret.yaml
 ```
 
+Before applying, ensure the template values are filled in `argocd.secret.yaml` with labels.
+
+```yaml
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: argocd-secret
+        app.kubernetes.io/part-of: argocd
+```
+
 Apply the sealed secret:
 
 ```bash

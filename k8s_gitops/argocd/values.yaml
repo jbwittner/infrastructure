@@ -20,18 +20,18 @@ server:
 configs:
   secret:
       extra:
-          dex.authentik.clientId: "${authentik-argocd-credentials:dex.authentik.clientId}"
-          dex.authentik.clientSecret: "${authentik-argocd-credentials:dex.authentik.clientSecret}"
+          dex.authentik.clientId: "xxx"
+          dex.authentik.clientSecret: "xxx"
   cm:
     statusbadge.enabled: true
-    admin.enabled: true
+    admin.enabled: false
     url: https://argocd.wittnerlab.com
     dex.config: |
       connectors:
       - config:
           issuer: https://authentik.wittnerlab.com/application/o/argocd/
-          clientID: $dex.authentik.clientId
-          clientSecret: $dex.authentik.clientSecret
+          clientID: $authentik-argocd-credentials:dex.authentik.clientId
+          clientSecret: $authentik-argocd-credentials:dex.authentik.clientSecret
           insecureEnableGroups: true
           scopes:
           - openid
