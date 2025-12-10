@@ -24,7 +24,7 @@ configs:
           dex.authentik.clientSecret: "xxx"
   cm:
     statusbadge.enabled: true
-    admin.enabled: false
+    admin.enabled: true
     url: https://argocd.wittnerlab.com
     dex.config: |
       connectors:
