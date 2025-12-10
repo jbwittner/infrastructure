@@ -19,21 +19,16 @@ spec:
         values: |
           persistence:
             defaultClassReplicaCount: 1
-          metrics:
-            serviceMonitor.enabled: true
-          preUpgradeChecker:
-            jobEnabled: false
-          defaultSettings:
             # CRITICAL FOR NETWORK ISSUES + REPLICA 1:
             # "strict-local" forces the volume to be on the same node as the pod.
             # If the pod moves, Longhorn will try to migrate the data (heavy network usage)
             # or block startup if it can't.
             # "best-effort" is safer: it prefers local, but allows remote if disk is full.
             defaultDataLocality: best-effort
-            # DISABLE auto-balancing to save network bandwidth.
-            # Since you have network issues, you don't want Longhorn moving 
-            # gigabytes of data just to balance disk usage automatically.
-            replicaAutoBalance: disabled
+          metrics:
+            serviceMonitor.enabled: true
+          preUpgradeChecker:
+            jobEnabled: false
       # Source pour les ressources auxiliaires (namespace, secrets, etc.)
     - repoURL: https://github.com/jbwittner/infrastructure
       targetRevision: main
