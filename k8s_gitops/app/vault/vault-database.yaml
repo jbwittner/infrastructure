@@ -1,30 +1,27 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+# File: k8s_gitops/app/authentik/resources/postgres.yaml
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
 metadata:
-  name: app-cloudnative-pg-cluster
-  namespace: argocd
+  name: vault-db
+  # No namespace needed here, ArgoCD will apply the destination namespace (authentik)
 spec:
-  project: default
-  syncPolicy:
-    automated:
-      enabled: true
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-  sources:
-    - chart: cluster
-      repoURL: https://cloudnative-pg.github.io/charts
-      targetRevision: 0.4.0
-      helm:
-        values: |
-          version:
-            postgresql: "18"
-          cluster:
-            monitoring:
-              enabled: true
-            storage:
-              size: 50Gi
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: databases
+  instances: 3
+  
+  # Low resource profile for standard usage
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 200m
+    limits:
+      memory: 1Gi
+
+  storage:
+    size: 10Gi
+    storageClass: longhorn 
+
+  bootstrap:
+    initdb:
+      database: vault
+      owner: vault
+      # This ensures the generated secret uses these specific keys if needed, 
+      # but standard CNPG secrets (username/password) are fine for Authentik.
