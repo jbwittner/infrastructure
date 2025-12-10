@@ -1,0 +1,38 @@
+authentik:
+  secret_key: S3Sd8v7Ej6A3j8YHXEbYkkKBs0BsIl
+  postgresql:
+    host: authentik-db-rw
+    name: authentik
+server:
+  env:
+    - name: AUTHENTIK_POSTGRESQL__USER
+      valueFrom:
+        secretKeyRef:
+          name: authentik-db-app
+          key: username
+    - name: AUTHENTIK_POSTGRESQL__PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: authentik-db-app
+          key: password
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+      external-dns.alpha.kubernetes.io/hostname: authentik.wittnerlab.com
+      external-dns.alpha.kubernetes.io/target: 9110d4dd-b637-4907-8ff3-cd54a0ddfbc8.cfargotunnel.com
+    hosts: 
+      - authentik.wittnerlab.com
+worker:
+  env:
+    - name: AUTHENTIK_POSTGRESQL__USER
+      valueFrom:
+        secretKeyRef:
+          name: authentik-db-app
+          key: username
+    - name: AUTHENTIK_POSTGRESQL__PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: authentik-db-app
+          key: password
