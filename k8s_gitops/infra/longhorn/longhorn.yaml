@@ -17,6 +17,8 @@ spec:
       targetRevision: 1.10.1 # Replace with the Longhorn version you'd like to install or upgrade to
       helm:
         values: |
+          persistence:
+            defaultClassReplicaCount: 1
           metrics:
             serviceMonitor.enabled: true
           preUpgradeChecker:
