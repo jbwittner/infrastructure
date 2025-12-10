@@ -32,10 +32,10 @@ cat gitops/infra/cloudflare-tunnel/extra-dns/resources/extra-dns.secret.yaml | \
   --format yaml > gitops/infra/cloudflare-tunnel/extra-dns/resources/extra-dns.sealed-secret.yaml
 
 # Cloudflare Tunnel secret
-cat gitops/infra/cloudflare-tunnel/wittnerlab-com/resources/cloudflare-tunnel.secret.yaml | \
+cat k8s_gitops/infra/cloudflare-tunnel/wittnerlab-com/resources/cloudflare-tunnel.secret.yaml | \
   kubeseal --controller-namespace sealed-secrets \
   --controller-name infra-sealed-secrets \
-  --format yaml > gitops/infra/cloudflare-tunnel/wittnerlab-com/resources/cloudflare-tunnel.sealed-secret.yaml
+  --format yaml > k8s_gitops/infra/cloudflare-tunnel/wittnerlab-com/resources/cloudflare-tunnel.sealed-secret.yaml
 ```
 
 ## Exposing Services
