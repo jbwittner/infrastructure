@@ -55,7 +55,6 @@ services:
       - 9443
     networks:
       - authentik-network
-      - dokploy-network
     depends_on:
       postgresql:
         condition: service_healthy
@@ -101,5 +100,3 @@ volumes:
 
 networks:
   authentik-network:
-  dokploy-network:
-    external: true
