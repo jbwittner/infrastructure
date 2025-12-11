@@ -10,8 +10,8 @@ services:
       retries: 5
       start_period: 20s
       test:
-      - CMD-SHELL
-      - pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
+        - CMD-SHELL
+        - pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
       timeout: 5s
     restart: unless-stopped
     volumes:
@@ -28,13 +28,13 @@ services:
       AUTHENTIK_POSTGRESQL__USER: ${PG_USER}
       AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY}
     image: ghcr.io/goauthentik/server:2025.10.2
-    ports:
-    - 9000
-    - 9443
+    expose:
+      - 9000
+      - 9443
     restart: unless-stopped
     volumes:
-    - media:/media
-    - custom-templates:/templates
+      - media:/media
+      - custom-templates:/templates
   worker:
     image: ghcr.io/goauthentik/server:2025.10.2
     command: worker
