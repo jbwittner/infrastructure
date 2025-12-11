@@ -1,0 +1,22 @@
+version: "3.8"  # Use the same version as your main file if possible
+
+services:
+  postgresql: # Must match the service name in the original file
+    env_file:
+      - example.env
+
+  redis: # Must match the service name in the original file
+    env_file:
+      - example.env
+
+  server: # Must match the service name in the original file
+    env_file:
+      - example.env
+    ports:
+      - 9000
+      - 9443
+
+
+  worker: # Must match the service name in the original file
+    env_file:
+      - example.env
