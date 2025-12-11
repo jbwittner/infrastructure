@@ -1,61 +1,25 @@
+version: "3.8"
 services:
   postgresql:
     image: docker.io/library/postgres:18-alpine
-    environment:
-      POSTGRES_DB: ${PG_DB}
-      POSTGRES_PASSWORD: ${PG_PASS}
-      POSTGRES_USER: ${PG_USER}
+    restart: unless-stopped
     healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      start_period: 20s
       interval: 30s
       retries: 5
-      start_period: 20s
-      test:
-        - CMD-SHELL
-        - pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
       timeout: 5s
-    restart: unless-stopped
     volumes:
       - database:/var/lib/postgresql/data
-  server:
-    command: server
-    depends_on:
-      postgresql:
-        condition: service_healthy
     environment:
-      AUTHENTIK_POSTGRESQL__HOST: postgresql
-      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB}
-      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
-      AUTHENTIK_POSTGRESQL__USER: ${PG_USER}
-      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY}
-    image: ghcr.io/goauthentik/server:2025.8.5
+      POSTGRES_PASSWORD: ${PG_PASS}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_DB: ${PG_DB}
     expose:
-      - 9000
-      - 9443
-    restart: unless-stopped
-    volumes:
-      - media:/media
-      - custom-templates:/templates
-  worker:
-    image: ghcr.io/goauthentik/server:2025.8.5
-    command: worker
-    depends_on:
-      postgresql:
-        condition: service_healthy
-    environment:
-      AUTHENTIK_POSTGRESQL__HOST: postgresql
-      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB}
-      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
-      AUTHENTIK_POSTGRESQL__USER: ${PG_USER}
-      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY}
-    restart: unless-stopped
-    user: root
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - media:/media
-      - certs:/certs
-      - custom-templates:/templates
+      - 5432
+
   redis:
-    image: docker.io/library/redis:8.2.3-alpine
+    image: docker.io/library/redis:alpine
     command: --save 60 1 --loglevel warning
     restart: unless-stopped
     healthcheck:
@@ -66,6 +30,54 @@ services:
       timeout: 3s
     volumes:
       - redis:/data
+    expose:
+      - 6379
+
+  server:
+    image: ghcr.io/goauthentik/server:2025.8.5
+    restart: unless-stopped
+    command: server
+    environment:
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY}
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: ${PG_USER}
+      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB}
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
+    volumes:
+      - media:/media
+      - custom-templates:/templates
+    expose:
+      - 9000
+      - 9443
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    image: ghcr.io/goauthentik/server:2025.8.5
+    restart: unless-stopped
+    command: worker
+    environment:
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY}
+      AUTHENTIK_REDIS__HOST: redis
+      AUTHENTIK_POSTGRESQL__HOST: postgresql
+      AUTHENTIK_POSTGRESQL__USER: ${PG_USER}
+      AUTHENTIK_POSTGRESQL__NAME: ${PG_DB}
+      AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
+    user: root
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - media:/media
+      - certs:/certs
+      - custom-templates:/templates
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
 
 volumes:
   database:
@@ -78,4 +90,3 @@ volumes:
     driver: local
   custom-templates:
     driver: local
-
