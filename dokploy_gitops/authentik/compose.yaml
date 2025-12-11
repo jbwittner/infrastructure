@@ -27,7 +27,7 @@ services:
       AUTHENTIK_POSTGRESQL__PASSWORD: ${PG_PASS}
       AUTHENTIK_POSTGRESQL__USER: ${PG_USER}
       AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY}
-    image: ghcr.io/goauthentik/server:2025.10.2
+    image: ghcr.io/goauthentik/server:2025.8.5
     expose:
       - 9000
       - 9443
@@ -36,7 +36,7 @@ services:
       - media:/media
       - custom-templates:/templates
   worker:
-    image: ghcr.io/goauthentik/server:2025.10.2
+    image: ghcr.io/goauthentik/server:2025.8.5
     command: worker
     depends_on:
       postgresql:
