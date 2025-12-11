@@ -10,8 +10,6 @@ services:
       timeout: 5s
     volumes:
       - database:/var/lib/postgresql/data
-    networks:
-      - authentik-network
     environment:
       POSTGRES_PASSWORD: ${PG_PASS}
       POSTGRES_USER: ${PG_USER}
@@ -31,8 +29,6 @@ services:
       timeout: 3s
     volumes:
       - redis:/data
-    networks:
-      - authentik-network
     expose:
       - 6379
 
@@ -53,8 +49,6 @@ services:
     expose:
       - 9000
       - 9443
-    networks:
-      - authentik-network
     depends_on:
       postgresql:
         condition: service_healthy
@@ -78,8 +72,6 @@ services:
       - media:/media
       - certs:/certs
       - custom-templates:/templates
-    networks:
-      - authentik-network
     depends_on:
       postgresql:
         condition: service_healthy
@@ -97,6 +89,3 @@ volumes:
     driver: local
   custom-templates:
     driver: local
-
-networks:
-  authentik-network:
