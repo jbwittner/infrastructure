@@ -3,7 +3,10 @@ services:
     image: louislam/uptime-kuma:2.0.2
     restart: unless-stopped
     volumes:
-      - ../files/data:/app/data
+      - kuma-data:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
     expose:
       - 3001
+
+volumes:
+  kuma-data:
