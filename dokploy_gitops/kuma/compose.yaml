@@ -4,5 +4,6 @@ services:
     restart: unless-stopped
     volumes:
       - ../files/data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
     expose:
       - 3001
