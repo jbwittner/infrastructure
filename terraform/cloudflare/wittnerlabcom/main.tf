@@ -8,25 +8,46 @@ data "cloudflare_account" "personal_account" {
   account_id = "588c0a8eaabdcd4db76d75b14250a0e1"
 }
 
-# resource "cloudflare_zone" "example_zone" {
-#   account = {
-#     id = "023e105f4ecef8ad9ca31a8372d0c353"
-#   }
-#   name = "wittnerlab.com"
-#   type = "full"
-# }
+resource "cloudflare_zone" "wittnerlabcom_zone" {
+  account = {
+    id = data.cloudflare_account.personal_account.id
+  }
+  name = "wittnerlab.com"
+}
 
-# resource "cloudflare_dns_record" "example_dns_record" {
-#   zone_id = "023e105f4ecef8ad9ca31a8372d0c353"
-#   name = "example.com"
-#   ttl = 3600
-#   type = "A"
-#   comment = "Domain verification record"
-#   content = "198.51.100.4"
-#   proxied = true
-#   settings = {
-#     ipv4_only = true
-#     ipv6_only = true
-#   }
-#   tags = ["owner:dns-team"]
-# }
+resource "cloudflare_dns_record" "authentik_dns_record" {
+  zone_id = cloudflare_zone.wittnerlabcom_zone.id
+  name    = "authentik"
+  ttl     = 1 # "auto"
+  type    = "A"
+  content = "54.37.86.175"
+  proxied = true
+}
+
+resource "cloudflare_dns_record" "dokploy_dns_record" {
+  zone_id = cloudflare_zone.wittnerlabcom_zone.id
+  name    = "dokploy"
+  ttl     = 1 # "auto"
+  type    = "A"
+  content = "54.37.86.175"
+  proxied = true
+}
+
+resource "cloudflare_dns_record" "excalidraw_dns_record" {
+  zone_id = cloudflare_zone.wittnerlabcom_zone.id
+  name    = "excalidraw"
+  ttl     = 1 # "auto"
+  type    = "A"
+  content = "54.37.86.175"
+  proxied = true
+}
+
+resource "cloudflare_dns_record" "kuma_dns_record" {
+  zone_id = cloudflare_zone.wittnerlabcom_zone.id
+  name    = "kuma"
+  ttl     = 1 # "auto"
+  type    = "A"
+  content = "54.37.86.175"
+  proxied = true
+}
+
