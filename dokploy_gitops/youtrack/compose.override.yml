@@ -1,0 +1,4 @@
+services:
+  youtrack: # Must match the service name in the original file
+    ports:
+      - 8080:8080
