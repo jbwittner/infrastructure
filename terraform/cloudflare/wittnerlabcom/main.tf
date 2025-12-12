@@ -51,3 +51,11 @@ resource "cloudflare_dns_record" "kuma_dns_record" {
   proxied = true
 }
 
+resource "cloudflare_dns_record" "youtrack_dns_record" {
+  zone_id = cloudflare_zone.wittnerlabcom_zone.id
+  name    = "youtrack"
+  ttl     = 1 # "auto"
+  type    = "A"
+  content = "54.37.86.175"
+  proxied = true
+}
