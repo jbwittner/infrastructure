@@ -23,7 +23,8 @@ resource "authentik_provider_oauth2" "youtrack-provider" {
   allowed_redirect_uris = [
     {
       matching_mode = "strict",
-      url           = "https://youtrack.wittnerlab.com/login/generic_oauth",
+      #url           = "https://youtrack.wittnerlab.com/login/generic_oauth",
+      url           = "http://localhost:8080/hub/api/rest/oauth2/interactive/login/6ebd4de1-d12b-44de-b6da-587b481e4951/land",
     }
   ]
   access_token_validity   = "minutes=5"
