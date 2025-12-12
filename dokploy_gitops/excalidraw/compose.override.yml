@@ -1,0 +1,4 @@
+services:
+  excalidraw: # Must match the service name in the original file
+    ports:
+      - 80:80
