@@ -39,3 +39,9 @@ resource "authentik_application" "grafana-application" {
 
   protocol_provider = authentik_provider_oauth2.grafana-provider.id
 }
+
+resource "authentik_policy_binding" "grafana-access" {
+  target = authentik_application.grafana-application.uuid
+  group  = authentik_group.grafana-users.id
+  order  = 0
+}

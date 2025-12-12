@@ -39,3 +39,9 @@ resource "authentik_application" "argocd-application" {
   open_in_new_tab   = true
   protocol_provider = authentik_provider_oauth2.argocd-provider.id
 }
+
+resource "authentik_policy_binding" "argocd-access" {
+  target = authentik_application.argocd-application.uuid
+  group  = authentik_group.argocd-users.id
+  order  = 0
+}

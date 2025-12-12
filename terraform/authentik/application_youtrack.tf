@@ -23,7 +23,7 @@ resource "authentik_provider_oauth2" "youtrack-provider" {
   allowed_redirect_uris = [
     {
       matching_mode = "strict",
-      url = "https://youtrack.wittnerlab.com/hub/api/rest/oauth2/interactive/login/6dca8800-ccad-4c23-aff7-ff57357424f1/land",
+      url           = "https://youtrack.wittnerlab.com/hub/api/rest/oauth2/interactive/login/6dca8800-ccad-4c23-aff7-ff57357424f1/land",
     }
   ]
   access_token_validity   = "minutes=5"
@@ -34,8 +34,14 @@ resource "authentik_provider_oauth2" "youtrack-provider" {
 resource "authentik_application" "youtrack-application" {
   name            = "YouTrack"
   slug            = "youtrack"
-  meta_icon       = "fa://fa-chart-area"
+  meta_icon       = "fa://fa-ticket"
   open_in_new_tab = true
 
   protocol_provider = authentik_provider_oauth2.youtrack-provider.id
+}
+
+resource "authentik_policy_binding" "youtrack-access" {
+  target = authentik_application.youtrack-application.uuid
+  group  = authentik_group.youtrack-users.id
+  order  = 0
 }
