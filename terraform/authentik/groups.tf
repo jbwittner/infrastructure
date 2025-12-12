@@ -15,3 +15,9 @@ resource "authentik_group" "argocd-users" {
   users        = []
   is_superuser = true
 }
+
+resource "authentik_group" "youtrack-admins" {
+  name         = "youtrack_admins"
+  users        = [authentik_user.jbwittner.id]
+  is_superuser = true
+}
