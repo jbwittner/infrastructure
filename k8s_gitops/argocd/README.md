@@ -13,7 +13,7 @@ helm repo update
 helm install argocd argo/argo-cd \
   --namespace argocd \
   --create-namespace \
-  --values argocd/values.yaml
+  --values k8s_gitops/argocd/values.yaml
 ```
 
 ## Access ArgoCD
