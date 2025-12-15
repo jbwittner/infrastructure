@@ -1,0 +1,12 @@
+persistence:
+  defaultClassReplicaCount: 1
+  # CRITICAL FOR NETWORK ISSUES + REPLICA 1:
+  # "strict-local" forces the volume to be on the same node as the pod.
+  # If the pod moves, Longhorn will try to migrate the data (heavy network usage)
+  # or block startup if it can't.
+  # "best-effort" is safer: it prefers local, but allows remote if disk is full.
+  defaultDataLocality: best-effort
+metrics:
+  serviceMonitor.enabled: true
+preUpgradeChecker:
+  jobEnabled: false

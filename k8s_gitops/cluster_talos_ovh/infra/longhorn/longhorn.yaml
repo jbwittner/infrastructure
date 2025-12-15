@@ -16,23 +16,12 @@ spec:
       repoURL: https://charts.longhorn.io/
       targetRevision: 1.10.1 # Replace with the Longhorn version you'd like to install or upgrade to
       helm:
-        values: |
-          persistence:
-            defaultClassReplicaCount: 1
-            # CRITICAL FOR NETWORK ISSUES + REPLICA 1:
-            # "strict-local" forces the volume to be on the same node as the pod.
-            # If the pod moves, Longhorn will try to migrate the data (heavy network usage)
-            # or block startup if it can't.
-            # "best-effort" is safer: it prefers local, but allows remote if disk is full.
-            defaultDataLocality: best-effort
-          metrics:
-            serviceMonitor.enabled: true
-          preUpgradeChecker:
-            jobEnabled: false
+        valueFiles:
+          - $infra-repo/k8s_gitops/cluster_talos_ovh/infra/longhorn/resources/values.yaml
       # Source pour les ressources auxiliaires (namespace, secrets, etc.)
     - repoURL: https://github.com/jbwittner/infrastructure
       targetRevision: main
-      path: k8s_gitops/infra/longhorn/resources
+      path: k8s_gitops/cluster_talos_ovh/infra/longhorn/resources
   destination:
     server: https://kubernetes.default.svc
     namespace: longhorn-system
