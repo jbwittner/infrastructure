@@ -1,5 +1,3 @@
-version: "3.8"  # Use the same version as your main file if possible
-
 services:
   kuma: # Must match the service name in the original file
     ports:

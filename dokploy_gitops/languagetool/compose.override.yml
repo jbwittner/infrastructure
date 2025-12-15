@@ -1,0 +1,4 @@
+services:
+  languagetool: # Must match the service name in the original file
+    ports:
+      - 8010:8010
