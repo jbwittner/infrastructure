@@ -13,15 +13,15 @@ provider "cloudflare" {
 }
 
 resource "cloudflare_account" "account" {
-  name              = "Jeanbaptiste.wittner@outlook.com's Account"
-  type              = "standard"
+  name = "Jeanbaptiste.wittner@outlook.com's Account"
+  type = "standard"
 }
 
 resource "cloudflare_zone" "zone" {
   account = {
-    id = cloudflare_account.account.id  
+    id = cloudflare_account.account.id
   }
-  name       = "bytedragon.tech"
+  name = "bytedragon.tech"
 }
 
 
