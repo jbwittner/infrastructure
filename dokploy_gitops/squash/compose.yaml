@@ -15,6 +15,24 @@ services:
     expose:
       - 8080
 
+  orchestrator:
+    image: squashtest/squash-orchestrator:6.1.0
+    restart: unless-stopped
+    volumes:
+      - squash-logs:/opt/squash-tm/logs
+    environment:
+      SSH_CHANNEL_HOST: ${ORCHESTRATOR_HOST}
+      SSH_CHANNEL_USER: ${ORCHESTRATOR_USER}
+      SSH_CHANNEL_PASSWORD: ${ORCHESTRATOR_PASS}
+      SSH_CHANNEL_TAGS: ssh,linux,robotframework
+    expose:
+      - 7774
+      - 7775
+      - 7776
+      - 38368
+      - 24368
+      - 12312
+
   postgresql:
     image: docker.io/library/postgres:18-alpine
     restart: unless-stopped
