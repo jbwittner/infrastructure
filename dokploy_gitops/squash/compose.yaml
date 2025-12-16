@@ -1,0 +1,40 @@
+services:
+  squash:
+    image: squashtest/squash:11.0.6
+    restart: unless-stopped
+    volumes:
+      - squash-logs:/opt/squash-tm/logs
+    environment:
+      SQTM_DB_TYPE: postgresql
+      SQTM_DB_HOST: postgresql
+      SQTM_DB_PORT: 5432
+      SQTM_DB_NAME: ${PG_DB}
+      SQTM_DB_SCHEMA: public
+      SQTM_DB_USERNAME: ${PG_USER}
+      SQTM_DB_PASSWORD: ${PG_PASS}
+    expose:
+      - 8080
+
+  postgresql:
+    image: docker.io/library/postgres:18-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      start_period: 20s
+      interval: 30s
+      retries: 5
+      timeout: 5s
+    volumes:
+      - database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${PG_PASS}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_DB: ${PG_DB}
+    expose:
+      - 5432
+
+volumes:
+  database:
+    driver: local
+  squash-logs:
+    driver: local
