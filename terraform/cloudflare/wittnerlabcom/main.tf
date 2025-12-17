@@ -1,11 +1,14 @@
 variable "ACCOUNT_TOKEN" {}
+variable "ACCOUNT_ID" {
+  default = "588c0a8eaabdcd4db76d75b14250a0e1"
+}
 
 provider "cloudflare" {
   api_token = var.ACCOUNT_TOKEN
 }
 
 data "cloudflare_account" "personal_account" {
-  account_id = "588c0a8eaabdcd4db76d75b14250a0e1"
+  account_id = var.ACCOUNT_ID
 }
 
 resource "cloudflare_zone" "wittnerlabcom_zone" {
@@ -77,3 +80,27 @@ resource "cloudflare_dns_record" "squash_dns_record" {
   content = "54.37.86.175"
   proxied = true
 }
+
+# data "cloudflare_account_permission_group" "example_account_permission_group" {
+#   account_id = data.cloudflare_account.personal_account.id
+#   permission_group_id = "49ce85367bae433b9f0717ed4fea5c74"
+# }
+
+# resource "cloudflare_account_token" "wittnerlabcom_test" {
+#   account_id = data.cloudflare_account.personal_account.id
+#   name = "external-dns-token-wittnerlabcom"
+#   policies = [{
+#     effect = "allow"
+#     permission_groups = [{
+#       id = data.cloudflare_account_permission_group.example_account_permission_group.id
+#       meta = {
+#         key = "key"
+#         value = "value"
+#       }
+#     }]
+#     resources = jsonencode({
+#       "com.cloudflare.api.account.zone.${cloudflare_zone.wittnerlabcom_zone.id}" = "*"
+#     })
+#   }]
+#   expires_on = "2030-01-01T00:00:00Z"
+# }
