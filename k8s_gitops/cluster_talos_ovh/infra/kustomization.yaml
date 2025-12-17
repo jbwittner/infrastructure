@@ -7,4 +7,4 @@ resources:
   - sealed-secrets/sealed-secrets.yaml
   - external-dns/external-dns.yaml
 #  - ingress-nginx/ingress-nginx.yaml
-#  - cloudflare-tunnel
+  - cloudflare-tunnel
