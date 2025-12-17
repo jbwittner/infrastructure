@@ -26,7 +26,7 @@ spec:
     - repoURL: https://github.com/jbwittner/infrastructure
       targetRevision: main
       ref: infra-repo
-      path: k8s_gitops/app/monitoring/resources
+      path: k8s_gitops/cluster_talos_ovh/app/monitoring/resources
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
