@@ -23,11 +23,10 @@ spec:
           env:
             # Defines an environment variable for the tunnel token.
             - name: TUNNEL_TOKEN
-              value: "eyJhIjoiNTg4YzBhOGVhYWJkY2Q0ZGI3NmQ3NWIxNDI1MGEwZTEiLCJ0IjoiODU1M2M4MmEtNjE1NC00ZDhmLTg0YTYtZjZiZGU2ODEyNjllIiwicyI6Ik1qUmtaalkwWkRrdE1HVTVNeTAwTURCaUxXSm1PR010T1dabVpqSmxOVEJsTmpSbSJ9"
-              # valueFrom:
-              #   secretKeyRef:
-              #     name: cloudflare-tunnel-token
-              #     key: token
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflare-tunnel-token
+                  key: token
           resources:
             requests:
               cpu: 100m
