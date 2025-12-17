@@ -30,6 +30,10 @@ spec:
                 service: "https://infra-ingress-nginx-controller.ingress-nginx.svc.cluster.local:443"
                 originRequest:
                   noTLSVerify: true
+          image:
+            repository: cloudflare/cloudflared
+            pullPolicy: IfNotPresent
+            tag: 2025.11.1
           resources:
             limits:
               cpu: "100m"
