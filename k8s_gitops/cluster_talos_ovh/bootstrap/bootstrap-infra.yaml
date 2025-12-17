@@ -18,6 +18,8 @@ kind: Application
 metadata:
   name: bootstrap-infras
   namespace: argocd
+  labels:
+    application-type: bootstrap
 spec:
   project: default
   source:
