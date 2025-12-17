@@ -10,14 +10,23 @@ spec:
   syncPolicy:
     automated:
       enabled: false
-      prune: false
-      selfHeal: false
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
   sources:
+    # Source pour le chart Helm
+    - chart: cloudflare-tunnel
+      repoURL: https://cloudflare.github.io/helm-charts
+      targetRevision: 0.3.2
+      helm:
+        valueFiles:
+          - $infra-repo/k8s_gitops/cluster_talos_ovh/infra/cloudflare-tunnel/tunnel-helm/resources/values.yaml
+      # Source pour les ressources auxiliaires (namespace, secrets, etc.)
     - repoURL: https://github.com/jbwittner/infrastructure
       targetRevision: main
-      path: k8s_gitops/cluster_talos_ovh/infra/cloudflare-tunnel/wittnerlab-com/resources
+      ref: infra-repo
+      path: k8s_gitops/cluster_talos_ovh/infra/cloudflare-tunnel/tunnel-helm/resources
   destination:
     server: https://kubernetes.default.svc
-    namespace: cloudflare-tunnel
+    namespace: cloudflare-tunnel-wittnerlab-com
