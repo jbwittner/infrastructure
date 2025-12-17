@@ -1,0 +1,21 @@
+cloudflare:
+  tunnelName: wittnerlabcom-tunnel-kubernetes
+  tunnelId: ffdf68d9-6878-4a0e-88c1-6877ff5630e6
+  secretName: cloudflare-tunnel-token
+  ingress:
+    - hostname: "*.wittnerlab.com"
+      service: "https://infra-ingress-nginx-controller.ingress-nginx.svc.cluster.local:443"
+      originRequest:
+        noTLSVerify: true
+image:
+  repository: cloudflare/cloudflared
+  pullPolicy: IfNotPresent
+  tag: 2025.11.1
+resources:
+  limits:
+    cpu: "100m"
+    memory: "128Mi"
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+replicaCount: 2
