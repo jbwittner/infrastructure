@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cloudflare-tunnel-wittnerlab-com
+  name: cloudflare-tunnel-wittnerlab-com-test
   namespace: argocd
   labels:
     application-type: infra
