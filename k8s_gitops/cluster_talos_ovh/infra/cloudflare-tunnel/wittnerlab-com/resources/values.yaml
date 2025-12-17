@@ -4,7 +4,7 @@ cloudflare:
   secretName: cloudflare-tunnel-secret
   ingress:
     - hostname: "*.wittnerlab.com"
-      service: "https://infra-ingress-nginx-controller.ingress-nginx.svc.cluster.local:443"
+      service: "https://traefik.traefik.svc.cluster.local:443"
       originRequest:
         noTLSVerify: true
 image:
