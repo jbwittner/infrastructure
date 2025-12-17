@@ -22,8 +22,8 @@ spec:
       helm:
         values: |
           cloudflare:
-            tunnelName: kubernetes-wittnerlab-com
-            tunnelId: 9110d4dd-b637-4907-8ff3-cd54a0ddfbc8
+            tunnelName: wittnerlabcom-tunnel-kubernetes
+            tunnelId: ffdf68d9-6878-4a0e-88c1-6877ff5630e6
             secretName: cloudflare-tunnel-token
             ingress:
               - hostname: "*.wittnerlab.com"
