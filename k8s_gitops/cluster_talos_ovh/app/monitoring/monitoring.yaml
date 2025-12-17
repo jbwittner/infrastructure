@@ -22,7 +22,7 @@ spec:
       targetRevision: 80.4.1
       helm:
         valueFiles:
-          - $infra-repo/k8s_gitops/app/monitoring/resources/values.yaml
+          - $infra-repo/k8s_gitops/cluster_talos_ovh/app/monitoring/resources/values.yaml
     - repoURL: https://github.com/jbwittner/infrastructure
       targetRevision: main
       ref: infra-repo
