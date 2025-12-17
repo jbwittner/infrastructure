@@ -29,4 +29,4 @@ spec:
       path: k8s_gitops/cluster_talos_ovh/infra/external-dns/resources
   destination:
     server: https://kubernetes.default.svc
-    namespace: cloudflare-tunnel
+    namespace: external-dns
