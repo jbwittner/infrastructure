@@ -11,6 +11,8 @@ server:
     pathType: Prefix
     path: /
 configs:
+  metrics:
+    enabled: true
   secret:
     githubSecret: $github-webhook-secret:github-secret
   params:
