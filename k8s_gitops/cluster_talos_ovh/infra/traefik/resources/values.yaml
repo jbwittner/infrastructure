@@ -4,3 +4,5 @@ service:
 ingressRoute:
   dashboard:
     enabled: true
+    matchRule: 'Host(`dashboard.localhost`)'
+    entryPoints: {web}
