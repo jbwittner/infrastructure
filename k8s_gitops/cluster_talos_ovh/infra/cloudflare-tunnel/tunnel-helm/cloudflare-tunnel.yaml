@@ -24,7 +24,7 @@ spec:
           cloudflare:
             tunnelName: kubernetes-wittnerlab-com
             tunnelId: 9110d4dd-b637-4907-8ff3-cd54a0ddfbc8
-            secretName: cloudflare-tunnel-credentials
+            secretName: cloudflare-tunnel-token
             ingress:
               - hostname: "*.wittnerlab.com"
                 service: "https://infra-ingress-nginx-controller.ingress-nginx.svc.cluster.local:443"
