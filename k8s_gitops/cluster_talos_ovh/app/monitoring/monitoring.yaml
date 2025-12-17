@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-monitoring
+  name: monitoring
   namespace: argocd
   labels:
     application-type: app
