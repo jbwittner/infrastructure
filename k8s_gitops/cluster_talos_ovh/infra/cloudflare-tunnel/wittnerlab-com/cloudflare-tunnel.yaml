@@ -21,12 +21,12 @@ spec:
       targetRevision: 0.3.2
       helm:
         valueFiles:
-          - $infra-repo/k8s_gitops/cluster_talos_ovh/infra/cloudflare-tunnel/tunnel-helm/resources/values.yaml
+          - $infra-repo/k8s_gitops/cluster_talos_ovh/infra/cloudflare-tunnel/wittnerlab-com/resources/values.yaml
       # Source pour les ressources auxiliaires (namespace, secrets, etc.)
     - repoURL: https://github.com/jbwittner/infrastructure
       targetRevision: main
       ref: infra-repo
-      path: k8s_gitops/cluster_talos_ovh/infra/cloudflare-tunnel/tunnel-helm/resources
+      path: k8s_gitops/cluster_talos_ovh/infra/cloudflare-tunnel/wittnerlab-com/resources
   destination:
     server: https://kubernetes.default.svc
     namespace: cloudflare-tunnel-wittnerlab-com
