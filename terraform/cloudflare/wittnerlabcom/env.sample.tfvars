@@ -1,2 +1,1 @@
 ACCOUNT_TOKEN = ""
-TUNNEL_SECRET = ""
