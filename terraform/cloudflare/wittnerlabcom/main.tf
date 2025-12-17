@@ -2,6 +2,7 @@ variable "ACCOUNT_TOKEN" {}
 variable "ACCOUNT_ID" {
   default = "588c0a8eaabdcd4db76d75b14250a0e1"
 }
+variable "TUNNEL_SECRET" {}
 
 provider "cloudflare" {
   api_token = var.ACCOUNT_TOKEN
@@ -80,6 +81,14 @@ resource "cloudflare_dns_record" "squash_dns_record" {
   content = "54.37.86.175"
   proxied = true
 }
+
+resource "cloudflare_zero_trust_tunnel_cloudflared" "wittnerlabcom_tunnel_kubernetes" {
+  account_id   = data.cloudflare_account.personal_account.id
+  name = "wittnerlabcom-tunnel-kubernetes"
+  config_src = "cloudflare"
+  tunnel_secret = var.TUNNEL_SECRET
+}
+
 
 # data "cloudflare_account_permission_group" "example_account_permission_group" {
 #   account_id = data.cloudflare_account.personal_account.id
