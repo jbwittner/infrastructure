@@ -17,7 +17,7 @@ spec:
     # Source pour le chart Helm
     - chart: kube-prometheus-stack
       repoURL: https://prometheus-community.github.io/helm-charts
-      targetRevision: 80.4.1
+      targetRevision: 80.4.2
       helm:
         valueFiles:
           - $infra-repo/k8s_gitops/app/monitoring/resources/values.yaml
