@@ -8,6 +8,9 @@ metadata:
 spec:
   project: default
   syncPolicy:
+    automated:
+      enabled: true
+      prune: true
     syncOptions:
       - CreateNamespace=true
   destination:
