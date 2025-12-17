@@ -18,10 +18,10 @@ Deployed using the `kube-prometheus-stack` Helm chart.
 Generate sealed secret for sensitive configuration:
 
 ```bash
-cat k8s_gitops/app/monitoring/resources/monitoring.secret.yaml | \
+cat k8s_gitops/cluster_talos_ovh/app/monitoring/resources/monitoring.secret.yaml | \
   kubeseal --controller-namespace sealed-secrets \
   --controller-name infra-sealed-secrets \
-  --format yaml > k8s_gitops/app/monitoring/resources/monitoring.sealed-secret.yaml
+  --format yaml > k8s_gitops/cluster_talos_ovh/app/monitoring/resources/monitoring.sealed-secret.yaml
 ```
 
 ## Access Dashboards

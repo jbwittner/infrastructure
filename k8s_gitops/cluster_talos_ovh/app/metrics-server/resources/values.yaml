@@ -1,0 +1,2 @@
+args:
+  - --kubelet-insecure-tls # Allow metrics-server to scrape metrics from kubelets with self-signed certificates

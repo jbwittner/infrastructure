@@ -3,6 +3,7 @@ kind: Application
 metadata:
   name: app-metrics-server
   namespace: argocd
+
 spec:
   project: default
   syncPolicy:
@@ -17,9 +18,12 @@ spec:
       repoURL: https://kubernetes-sigs.github.io/metrics-server
       targetRevision: 3.13.0
       helm:
-        values: |
-          args:
-            - --kubelet-insecure-tls # Allow metrics-server to scrape metrics from kubelets with self-signed certificates
+        valueFiles:
+          - $infra-repo/k8s_gitops/app/metrics-server/resources/values.yaml
+    - repoURL: https://github.com/jbwittner/infrastructure
+      targetRevision: main
+      ref: infra-repo
+      path: k8s_gitops/app/metrics-server/resources
   destination:
     server: https://kubernetes.default.svc
     namespace: metrics-server
