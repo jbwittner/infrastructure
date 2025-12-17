@@ -4,7 +4,7 @@ metadata:
   name: traefik
   namespace: argocd
   labels:
-    - example
+    application-type: infra
 spec:
   project: default
   syncPolicy:
