@@ -13,7 +13,7 @@ server:
       nginx.ingress.kubernetes.io/service-upstream: "true"
       nginx.ingress.kubernetes.io/proxy-ssl-verify: "false" # Disable SSL verification for self-signed certs
       nginx.ingress.kubernetes.io/ssl-passthrough: "true" # Necessary for ArgoCD to work behind nginx with TLS
-    tls: true # Enable TLS termination
+    tls: false # Enable TLS termination
     pathType: Prefix
     path: /
 # configs:
