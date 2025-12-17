@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metrics-server
+  namespace: argocd
+  labels:
+    application-type: app
+spec:
+  project: default
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - chart: gitlab-runner
+      repoURL: https://charts.gitlab.io
+      targetRevision: 3.13.0
+      helm:
+        valueFiles:
+          - $infra-repo/k8s_gitops/cluster_talos_ovh/app/metrics-server/resources/values.yaml
+    - repoURL: https://github.com/jbwittner/infrastructure
+      targetRevision: main
+      ref: infra-repo
+      path: k8s_gitops/cluster_talos_ovh/app/metrics-server/resources
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: metrics-server

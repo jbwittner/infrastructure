@@ -12,9 +12,8 @@ server:
     path: /
 configs:
   secret:
-      extra:
-          dex.authentik.clientId: "xxx"
-          dex.authentik.clientSecret: "xxx"
+    githubSecret: $github-webhook-secret:github-secret
+    createSecret: false
   params:
     server.insecure: "true"
   cm:
