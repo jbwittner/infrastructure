@@ -1,6 +1,6 @@
 cloudflare:
   tunnelName: k8s-wittnerlab
-  tunnelId: ffdf68d9-6878-4a0e-88c1-6877ff5630e6
+  tunnelId: f9de1d0c-0f6f-4389-b8cb-029bee73d70d
   secretName: cloudflare-tunnel-secret
   ingress:
     - hostname: "*.wittnerlab.com"
