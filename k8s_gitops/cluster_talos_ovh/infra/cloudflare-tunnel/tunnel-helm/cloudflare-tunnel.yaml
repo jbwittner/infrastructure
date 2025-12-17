@@ -41,7 +41,7 @@ spec:
     # Source pour les ressources auxiliaires (namespace, secrets, etc.
     - repoURL: https://github.com/jbwittner/infrastructure
       targetRevision: main
-      path: k8s_gitops/cluster_talos_ovh/infra/cloudflare-tunnel/wittnerlab-com/resources
+      path: k8s_gitops/cluster_talos_ovh/infra/cloudflare-tunnel/tunnel-helm/resources
   destination:
     server: https://kubernetes.default.svc
     namespace: cloudflare-tunnel-test
