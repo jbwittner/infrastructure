@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   - longhorn/longhorn.yaml
   - traefik/traefik.yaml
-#  - sealed-secrets/sealed-secrets.yaml
+  - sealed-secrets/sealed-secrets.yaml
 #  - ingress-nginx/ingress-nginx.yaml
 #  - cloudflare-tunnel
