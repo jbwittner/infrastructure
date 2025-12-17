@@ -13,7 +13,6 @@ server:
 configs:
   secret:
     githubSecret: $github-webhook-secret:github-secret
-    createSecret: false
   params:
     server.insecure: "true"
   cm:
@@ -24,8 +23,8 @@ configs:
       connectors:
       - config:
           issuer: https://authentik.wittnerlab.com/application/o/argocd/
-          clientID: $authentik-argocd-credentials:dex.authentik.clientId
-          clientSecret: $authentik-argocd-credentials:dex.authentik.clientSecret
+          clientID: $authentik-argocd-credentials:clientId
+          clientSecret: $authentik-argocd-credentials:clientSecret
           insecureEnableGroups: true
           scopes:
           - openid
