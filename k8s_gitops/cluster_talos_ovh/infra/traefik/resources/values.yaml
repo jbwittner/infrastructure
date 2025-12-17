@@ -4,6 +4,6 @@ service:
 ingressRoute:
   dashboard:
     enabled: true
-log:
+logs:
   general:
     level: DEBUG
