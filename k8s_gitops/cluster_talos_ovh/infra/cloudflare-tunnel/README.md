@@ -26,16 +26,16 @@ Generate sealed secrets for sensitive credentials:
 
 ```bash
 # External DNS secret
-cat gitops/infra/cloudflare-tunnel/extra-dns/resources/extra-dns.secret.yaml | \
+cat k8s_gitops/cluster_talos_ovh/infra/cloudflare-tunnel/extra-dns/resources/extra-dns.secret.yaml | \
   kubeseal --controller-namespace sealed-secrets \
-  --controller-name infra-sealed-secrets \
-  --format yaml > gitops/infra/cloudflare-tunnel/extra-dns/resources/extra-dns.sealed-secret.yaml
+  --controller-name sealed-secrets \
+  --format yaml > k8s_gitops/cluster_talos_ovh/infra/cloudflare-tunnel/extra-dns/resources/extra-dns.sealed-secret.yaml
 
 # Cloudflare Tunnel secret
-cat k8s_gitops/infra/cloudflare-tunnel/wittnerlab-com/resources/cloudflare-tunnel.secret.yaml | \
+cat k8s_gitops/cluster_talos_ovh/infra/cloudflare-tunnel/wittnerlab-com/resources/cloudflare-tunnel.secret.yaml | \
   kubeseal --controller-namespace sealed-secrets \
-  --controller-name infra-sealed-secrets \
-  --format yaml > k8s_gitops/infra/cloudflare-tunnel/wittnerlab-com/resources/cloudflare-tunnel.sealed-secret.yaml
+  --controller-name sealed-secrets \
+  --format yaml > k8s_gitops/cluster_talos_ovh/infra/cloudflare-tunnel/wittnerlab-com/resources/cloudflare-tunnel.sealed-secret.yaml
 ```
 
 ## Exposing Services
