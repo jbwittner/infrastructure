@@ -15,7 +15,7 @@ spec:
   sources:
     - chart: authentik
       repoURL: https://charts.goauthentik.io
-      targetRevision: 2025.10.2
+      targetRevision: 2025.10.3
       helm:
         valueFiles:
           - $infra-repo/k8s_gitops/app/authentik/resources/values.yaml
