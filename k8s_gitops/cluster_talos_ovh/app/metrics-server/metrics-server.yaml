@@ -3,7 +3,8 @@ kind: Application
 metadata:
   name: app-metrics-server
   namespace: argocd
-
+  labels:
+    application-type: app
 spec:
   project: default
   syncPolicy:

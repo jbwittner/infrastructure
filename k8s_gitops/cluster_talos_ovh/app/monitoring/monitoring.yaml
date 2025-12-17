@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: app-monitoring
   namespace: argocd
+  labels:
+    application-type: app
 spec:
   project: default
   syncPolicy:
