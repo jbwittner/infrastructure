@@ -1,8 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: infra-cloudflare-extra-dns
+  name: external-dns
   namespace: argocd
+  labels:
+    application-type: infra
 spec:
   project: default
   syncPolicy:
@@ -18,22 +20,13 @@ spec:
       repoURL: https://kubernetes-sigs.github.io/external-dns
       targetRevision: 1.19.0
       helm:
-        values: |
-          env:
-          - name: CF_API_TOKEN
-            valueFrom:
-              secretKeyRef:
-                key: apiKey
-                name: cloudflare-api-key
-          policy: sync
-          provider:
-            name: cloudflare
-          sources:
-          - ingress
-    # Source pour les ressources auxiliaires (namespace, secrets, etc.)
+        valueFiles:
+          - $infra-repo/k8s_gitops/cluster_talos_ovh/infra/external-dns/resources/values.yaml
+      # Source pour les ressources auxiliaires (namespace, secrets, etc.)
     - repoURL: https://github.com/jbwittner/infrastructure
       targetRevision: main
-      path: k8s_gitops/infra/cloudflare-tunnel/extra-dns/resources
+      ref: infra-repo
+      path: k8s_gitops/cluster_talos_ovh/infra/external-dns/resources
   destination:
     server: https://kubernetes.default.svc
     namespace: cloudflare-tunnel
