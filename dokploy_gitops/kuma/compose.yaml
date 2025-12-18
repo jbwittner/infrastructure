@@ -7,6 +7,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     expose:
       - 3001
+    labels:
+      - "traefik.http.middlewares.uptime-kuma-headers.headers.customResponseHeaders.X-Frame-Options="
+      - "traefik.http.middlewares.uptime-kuma-headers.headers.contentSecurityPolicy=frame-ancestors 'self' https://laboussole.dev http://localhost:4321"
+      - "traefik.http.routers.uptime-kuma.middlewares=uptime-kuma-headers"
 
 volumes:
   kuma-data:
+
+
