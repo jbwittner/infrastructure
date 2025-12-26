@@ -1,0 +1,10 @@
+services:
+  app: # Must match the service name in the original file``
+    env_file:
+      - example.env
+    ports:
+      - 80:8080
+
+  db:
+    env_file:
+      - example.db.env

@@ -72,6 +72,15 @@ resource "cloudflare_dns_record" "languagetool_dns_record" {
   proxied = true
 }
 
+resource "cloudflare_dns_record" "firefly_dns_record" {
+  zone_id = cloudflare_zone.wittnerlabcom_zone.id
+  name    = "firefly"
+  ttl     = 1 # "auto"
+  type    = "A"
+  content = "54.37.86.175"
+  proxied = true
+}
+
 resource "cloudflare_dns_record" "squash_dns_record" {
   zone_id = cloudflare_zone.wittnerlabcom_zone.id
   name    = "squash"
